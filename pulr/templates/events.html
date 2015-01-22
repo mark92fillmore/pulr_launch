@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+	
+	{% block title %} Events {% endblock %}
+	{% set active_page = 'events' %} 
+	{% block content %}
+		<div class="title-block">
+			<h1 class="post-title">Events</h1>
+		</div>
+
+		
+	  {% if events %}
+	  <ul>
+	    {% for event in events %}
+	    <div class="event-preview">
+	      <li><a href=" {{ event.url }} "> {{ event.title|e }}</li>
+        </div>
+	    {% endfor %}
+	  </ul>
+	  {% endif %}
+	  
+    {% if not Events %}
+      <h1>No Events.</h1>
+    {% endif %}
+	{% endblock content %}
+

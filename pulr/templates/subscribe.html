@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+  
+  {% block title %} Subscribe {% endblock title %}
+  {% set active_page = 'subscribe' %}
+  {% block content %}
+   <div class="section form-wrapper">
+    <h1 class="post-title">Subscribe</h1>
+      <p class="post-teaser">
+        Stay on top of our latest releases, activities, and calls for submission by subscribing to our newsletter.
+      </p>
+
+    {% for message in form.name.errors %}
+        <div class="flash"> {{ message }} </div>
+      {% endfor %}
+
+      {% for message in form.email.errors %}
+        <div class="flash"> {{ message }} </div>
+      {% endfor %}
+
+      <form action="{{ url_for('subscribe') }}" method="post">
+
+      {{ form.hidden_tag() }}
+
+      {% for field in form if not field.csrf_token %}
+        {{ field.label }}
+        {{ field }}
+      {% endfor %}
+
+      </form>
+   </div>
+  {% endblock content %}

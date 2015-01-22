@@ -1,0 +1,38 @@
+{% block hero %}
+<div class="hero cycle-slideshow" data-cycle-slides=".test">
+     {% if featured %}
+       {% for featured in featured_posts %}
+	     <div class="featured" data-src" {{ featured.image}}">
+		     <h2 class="featured-title" > {{ featured.title }} </h2>
+			 <h3> {{ featured.byline }} </h3>
+		 </div>     
+	   {% endfor %}
+	 {% endif %}
+	 
+	     <div class="featured test">
+		     <h2 class="featured-title">Molestiae, tenetur, praesentium?</h2>
+			 <h3>Fred Astaire</h3>
+		 </div>
+
+		 <div class="test"><h1>This</h1></div>
+		 <div class="test">
+		 	<h1>Is</h1>
+		 </div>
+		 <div class="test">
+		 	<h1>A</h1>
+		 </div>
+		 <div class="test">
+		 	<h1>Test</h1>
+		 </div>
+
+
+
+</div>
+		 <div class="featured-large">
+		   <div class="featured-large-content-wrap">
+		 	<h2 class="featured-title">Header</h2>
+		 	<h3 class="featured-byline">Byline</h3>
+		 	<p class="featured-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat molestiae id officiis ratione totam sint necessitatibus laboriosam libero . . . </p>
+	 	   </div>
+		 </div>
+{% endblock hero %}

@@ -1,0 +1,8 @@
+<!--   <h1>Flaskr Test</h1>
+<div class="metanav">
+  {% if not session.logged_in %}
+     <a href="{{ url_for('login') }}">Log In</a>
+  {% else %}
+     <a href="{{ url_for('logout') }}">Log Out</a>
+  {% endif %}
+</div> /Metanav -->

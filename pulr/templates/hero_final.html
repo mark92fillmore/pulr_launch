@@ -1,0 +1,23 @@
+<div class="cycle-slideshow" 
+    data-cycle-slides=".group"
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-speed=700
+    data-cycle-caption-plugin=caption2
+    data-cycle-overlay-fx-sel="span"
+    >
+    <span class="cycle-caption"></span>
+    <span class="cycle-overlay"></span>
+	
+
+	{% if featured_posts %}
+		{% for featured in featured_posts %}
+		<div class="group">
+			<div class="slide">
+				<h1 class="cap"><a href=" {{ featured.url }} "> {{ featured.title }} </a></h1>
+			</div>
+		</div>
+		{% endfor %}
+	{% endif %}
+    
+</div>
