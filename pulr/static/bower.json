@@ -1,0 +1,12 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "main": "path/to/main.css",
+  "dependencies": {
+    "html5-boilerplate": "~4.3.0"
+  },
+  "devDependencies": {
+    "mocha": "~2.0.1",
+    "grunt": "~0.4.5"
+  }
+}

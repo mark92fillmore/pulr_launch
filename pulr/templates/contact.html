@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+  {% block content %}
+  {% set active_page = 'contact' %}
+
+  <div class="section form-wrapper">
+    <div class="wrapper-hack">
+    <h1 class="post-title">Contact</h1>
+
+    {% for message in form.name.errors %}
+        <div class="flash"> {{ message }} </div>
+      {% endfor %}
+
+      {% for message in form.subject.errors %}
+        <div class="flash"> {{ message }} </div>
+      {% endfor %}      
+
+      {% for message in form.email.errors %}
+        <div class="flash"> {{ message }} </div>
+      {% endfor %}
+
+      {% for message in form.message.errors %}
+        <div class="flash"> {{ message }} </div>
+      {% endfor %}
+
+
+      <form action="{{ url_for('contact') }}" method="post">
+
+      {{ form.hidden_tag() }}
+
+      {% for field in form if not field.csrf_token %}
+        {{ field.label }}
+        {{ field }}
+      {% endfor %}
+
+      </form>
+     </div>
+   </div>
+  {% endblock content %}    }

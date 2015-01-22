@@ -1,0 +1,1 @@
+$(function(a){a("#slider").slideReveal({position:"left",speed:600,trigger:a("#trigger")});a(".title-block").after("<hr>"),a(".publication").after("<hr>"),a("form").click(function(){setTimeout(function(){a(".flash").slideUp(500)},250)})});

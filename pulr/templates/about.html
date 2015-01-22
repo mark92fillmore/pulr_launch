@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+  {% block content %}
+   <div class="about-image">
+    </div>
+    <section class="section about-text">
+	    <h1 class="post-title">About</h1>
+	    <p class="post-teaser">
+	    	The Princeton Undergraduate Law Review is an online journal that publicizes undergraduate, graduate and faculty work on law and legal issues.
+      </p>
+      <p> 
+      Founded in 2014 and associated with the Princeton Pre-Law Society
+      The mission of the Princeton Undergraduate Law Review is to provide a forum for the university and greater community to engage in discussion and debate about legal topics and scholarship. If you have any questions or concerns, please contact the Editor-in-Chief, Charlotte Chun, at <a href="mailto:ychun@princeton.edu?Subject=User%20Query" target="_top">ychun@princeton.edu</a>.
+	    </p>
+      <hr>
+
+      {# 
+      <div class="editorial-board-profile">
+      {% if editorial-board %}
+         {% for editor in editorial-board %}
+         <img src=" {{ editor.image }} " alt=" {{ editor.caption}} " class="editorial-board-image">
+         <p class="editorial-board-biography"> {{ editor.biography }} </p>
+         {% endfor %}
+      {% endif %} 
+      </div>
+      #}
+
+      <div class="editorial-board-profile">
+        <img src="{{ url_for('static', filename='images/editorial_board/ella.jpg') }}" alt="Editorial Board Member" class="editorial-board-image">
+        <p class="editorial-board-biography">Ella Cheng is a junior in the Woodrow Wilson School with a certificate in Values &amp; Public Life. She is from New York City, and is a member of the Editorial Board.</p>
+      </div>
+
+      <div class="editorial-board-profile">
+        <img src="{{ url_for('static', filename='images/editorial_board/charlotte.jpg') }}" alt="Editorial Board Member" class="editorial-board-image">
+        <p class="editorial-board-biography">Ye Eun Charlotte Chun is a junior in the Politics Department with a certificate in Urban Studies. She is from Seoul, South Korea and is the Editor-in-Chief of the Princeton Undergraduate Law Review.</p>
+      </div>
+
+      <div class="editorial-board-profile">
+        <img src="{{ url_for('static', filename='images/editorial_board/carol.jpg') }}" alt="Editorial Board Member" class="editorial-board-image">
+        <p class="editorial-board-biography">Carol Gu is a sophomore and prospective Chemistry major. She is from Ellicott City, Maryland and is a member of the Editorial Board.</p>
+      </div>
+
+      <div class="editorial-board-profile">
+        <img src="{{ url_for('static', filename='images/editorial_board/selena.jpg') }}" alt="Editorial Board Member" class="editorial-board-image">
+        <p class="editorial-board-biography">Selena Kitchens is a sophomore and prospective Classics major. She is from Beaverdam, Virginia and is a member of the Editorial Board.</p>
+      </div>
+
+      <div class="editorial-board-profile">
+        <img src="{{ url_for('static', filename='images/editorial_board/martha.jpg') }}" alt="Editorial Board Member" class="editorial-board-image">
+        <p class="editorial-board-biography">Martha Jachimski is a sophomore and prospective Woodrow Wilson major. She is from New York City and is a member of the Editorial Board.</p>
+      </div>
+
+    </section>
+  {% endblock %}

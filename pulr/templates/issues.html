@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+  
+  {% block title %} Issues {% endblock title %}
+  {% set active_page = 'issues' %}
+
+    {% block content %}
+      <div class="title-block">
+      <h1>Princeton Undergraduate Law Review</h1>
+	       <h2>Latest Issues</h2>
+      }
+      </div>
+	  {# 
+	  {% if articles %}
+	  <ul>
+	    {% for article in articles %}
+	      <li>
+	        <img src="http://placehold.it/470x140" alt="Featured Post">
+	        <div class="publication-image-div" data-src=" {{ article.image }} "></div>
+	        <h2><a href=" {{ article.url }} "> {{ article.title|e }} </a></h2>
+	        <p> {{ article.text|truncate|e }} </p>
+	      </li>
+	    {% endfor %}
+	  </ul>
+	  {% endif %}
+	  #}
+    {% if not articles %}
+      <h1>No Issues.</h1>
+    {% endif %}
+
+	      <div class="publication-wrapper">
+	        <img class="publication-image" src="http://placehold.it/470x100" width="470px" height="100px" alt="Featured Images">	
+        	<h2><a href=" # "> The Limits of Law: A Fake Title </a></h2>
+	        <h3 class="byline">By O. Singh <span class="fa fa-minus"></span> 12.12.2014</h3>
+	        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A iusto ratione ex magnam quidem, delectus rem, alias facilis dignissimos commodi dolorem cumque quos aliquid tempora sapiente expedita consectetur. Nihil, porro. </p>
+	        <h3 class="read-more"><a href="#">Read More . . .</a></h3>
+	        <ul class="publication-social">
+		        <li><a class="twitter-share-button" {# data-href=" {{ publication.url }}" #} href="https://twitter.com/share">Tweet</a></li>
+		        <li><a class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></a></li>
+	        </ul>
+	      </div>
+   {% endblock content %}
