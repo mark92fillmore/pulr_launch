@@ -1,8 +1,12 @@
-from . import app, db, mail
+from . import admin, app, db, mail
 from .database import db_session
+from .models import User, Post, Article, Event
 from flask import abort, flash, request, redirect, render_template, \
      session, url_for
+from flask.ext.admin import Admin, AdminIndexView, BaseView, expose
+from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.mail import Message, Mail
+from flaskext.uploads import UploadSet, DOCUMENTS
 from .forms import ContactForm, SubscribeForm
 from flask_wtf import Form
 from wtforms import validators
@@ -11,13 +15,25 @@ from wtforms import validators
 #    Base Views   #
 ###################
 
-@app.route('/login/')
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
-	return 'Login Page'
+	error = None
+	if request.method == 'POST':
+		if request.form['username'] != app.config['USERNAME']:
+			error = 'Invalid username.'
+		elif request.form['password'] != app.config['PASSWORD']:
+			error = 'Invalid password.'
+		else:
+			session['logged_in'] = True
+			flash('You\'ve been successfully logged in.')
+			return redirect(url_for('admin.index'))
+	return render_template('login.html', error=error)
 
 @app.route('/logout/')
 def logout():
-	return 'Logout Page'
+	session.pop('logged_in', None)
+	flash('You\'ve been successfully logged out.')
+	return 'Logout Page.'
 
 @app.route('/')
 def home():
@@ -80,7 +96,8 @@ def subscribe():
 
 @app.route('/issues/')
 def issues():
-	articles = 1;
+	q = db.session.query(User)
+	articles = q.all()
 	return render_template('issues.html', articles=articles)
 
 @app.route('/blog/')
@@ -88,13 +105,28 @@ def blog():
 	posts = 1;
 	return render_template('blog.html', posts=posts)
 
-# Static
-# For now: styleguide.html contains copy
-# Later: Use Flatpages (?) and/or Freeze
 @app.route('/events/')
 def events():
 	return render_template('events.html')
 
-#################
-#    Dynamic    #
-#################
+##############################
+#    Administrative Views    #
+##############################
+
+class AuthIndex(BaseView):
+	def is_accessible(self):
+		return session['logged_in'] == True
+
+	def _handle_view(self, name, **kwargs):
+		if not self.is_accessible():
+		  return redirect(url_for('login'))
+
+class AdminIndex(AuthIndex, AdminIndexView):   
+  @expose('/')
+  def index(self):
+  	return self.render('admin/index.html')
+
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Post, db.session))
+admin.add_view(ModelView(Article, db.session))
+admin.add_view(ModelView(Event, db.session))

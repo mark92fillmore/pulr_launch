@@ -1,0 +1,13 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+  <h1 style="text-align: center; ">Welcome to the Administrator's Area.</h1>
+  <br>
+  <p>Here you can view and edit User, Blog Post, and Journal Article information by clicking on any of the tabs above. For the most part, the Administrator's Area is fairly self-explanatory, but instructions and clarification are provided wherever necessary.</p>
+  
+  {% if not session['logged_in'] %}
+  	<div class="admin-login-form">
+	    {% include 'login2.html' %}
+  	</div>
+  {% endif %}
+
+{% endblock %}

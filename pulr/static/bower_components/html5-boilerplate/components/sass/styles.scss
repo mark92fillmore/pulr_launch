@@ -244,11 +244,13 @@ input {
 			margin-right: 1em;
 	}
 } 
+
 input[type="text"] {
 	width: 100%;
 	margin-right: 0;
 	padding-left: 0.6em;
 }
+
 input[type="submit"] {
 	width: 30%;
 	margin-left: 0;
@@ -825,12 +827,31 @@ input[type="submit"] {
 }
 
 .flash {
-	width: 300px;
+	display: block;
+	margin: 0 auto;
 	margin-top: 10px;
+	width: 300px;
 	padding: 10px;
     background-color: #FBB0B0;
     color: $base03;
     @include border-radius();
+}
+
+#login {
+	display: block;
+	margin: 0 auto;
+
+	dl, dt {
+		text-align: center;
+	}
+	input[type="submit"] {
+		width: 10%;
+	}
+}
+
+.admin-login-form {
+	display: block;
+	margin: 2em auto;
 }
 
 /*****************

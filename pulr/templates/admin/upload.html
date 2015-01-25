@@ -1,0 +1,9 @@
+{% extends 'admin/master.html' %}
+	{% block content %}
+		<form action=" {{ url_for('upload') }} " method=POST enctype="multipart/form-data">
+			<label for="document">Document to Upload</label>
+			<input type="file" name="document">
+			<label for="document_submit">Submit</label>
+			<input type="submit" name="document_submit">
+		</form>
+	{% endblock %}
