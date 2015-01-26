@@ -20,12 +20,15 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 app.config.update(dict(
     DEBUG=True,
-    SECRET_KEY='development_key',
+    SECRET_KEY='8biS29C[UE6zsE#P_1@)KrCu{{b3?R',
     USERNAME='administrator',
-    PASSWORD='Pulr*2015',
-    MAIL_SERVER='smtp.google.com',
-    MAIL_USERNAME='fsengsta@princeton.edu',
-    MAIL_PASSWORD='S3ngstacke*',
+    PASSWORD='pulr*2015',
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_USERNAME='pulr.manager@gmail.com',
+    MAIL_PASSWORD='pulr*2015',
+    MAIL_USE_SSL=True,
+    MAIL_PORT=465,
+    DEFAULT_MAIL_SENDER='pulr.manager@gmail.com',
     UPLOADED_FILES_DEST= lambda app : app.instance_root
 	))
 

@@ -41,16 +41,8 @@ def home():
 
 @app.route('/index/')
 def index():
-	# Featured | query_latest_5
-	# Events   | query_upcoming_5
-	# Posts    | query_featured_5
-	#  -- Could just reprint 'featured' articles here
-
 	return render_template('index_update.html')
-	# return render_template('index.html', featured=featured, events=events, \
-		# posts=posts)
 
-# Later: Use Flatpages (?) and/or Freeze
 @app.route('/about/')
 def about():
 	return render_template('about.html')
@@ -61,48 +53,49 @@ def contact():
 
 	if request.method == 'POST' and form.validate():
 		msg = Message(form.subject.data, \
-			sender='fsengsta@princeton.edu',\
-			recipients=['fsengsta@princeton.edu'])
+			sender='pulr.manager@gmail.com', \
+			recipients=['pulr.manager@gmail.com'])
 		msg.body = """
 		From: %s <%s>
 		%s
 		""" % (form.name.data, form.email.data, form.message.data)
 		mail.send(msg)
-		return form.redirect('index')
+		flash('Your message was sent successfully!')
+		return form.redirect('contact')
 
 	elif request.method == 'GET':
 		return render_template('contact.html', form=form)
 
 	else:
-		flash('Please fill out all required fields.')
 		return render_template('contact.html', form=form)
 
 @app.route('/subscribe/', methods=['GET', 'POST'])
 def subscribe():
 	form = SubscribeForm(request.form)
 
-	# Add user to database
 	if request.method == 'POST' and form.validate():
-		flash('Thank you for signing up!')
-		flash('You are now being redirected to the home page.')
-		return form.redirect('index')
+		user = User(form.name.data, form.email.data)
+		db.session.add(user)
+		db.session.commit()
+		flash('You have been registered successfully!')
+		return redirect('subscribe')
 
 	elif request.method == 'GET':
 		return render_template('subscribe.html', form=form)
 
 	else:
-		flash('Please fill out all required fields.')
 		return render_template('subscribe.html', form=form)
 
 @app.route('/issues/')
 def issues():
-	q = db.session.query(User)
+	q = db.session.query(Article)
 	articles = q.all()
 	return render_template('issues.html', articles=articles)
 
 @app.route('/blog/')
 def blog():
-	posts = 1;
+	q = db.session.query(Post)
+	posts = q.all()
 	return render_template('blog.html', posts=posts)
 
 @app.route('/events/')
@@ -115,7 +108,9 @@ def events():
 
 class AuthIndex(BaseView):
 	def is_accessible(self):
-		return session['logged_in'] == True
+		if session['logged_in'] == True:
+			return True
+		return False
 
 	def _handle_view(self, name, **kwargs):
 		if not self.is_accessible():

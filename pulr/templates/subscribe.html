@@ -9,6 +9,10 @@
         Stay on top of our latest releases, activities, and calls for submission by subscribing to our newsletter.
       </p>
 
+      {% for message in get_flashed_messages() %}
+        <div class="flash success">{{ message }}</div>
+      {% endfor %}
+
     {% for message in form.name.errors %}
         <div class="flash"> {{ message }} </div>
       {% endfor %}

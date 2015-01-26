@@ -7,6 +7,12 @@
     <div class="wrapper-hack">
     <h1 class="post-title">Contact</h1>
 
+    {% if get_flashed_messages() %}
+      {% for message in get_flashed_messages() %}
+      <div class="flash success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
     {% for message in form.name.errors %}
         <div class="flash"> {{ message }} </div>
       {% endfor %}

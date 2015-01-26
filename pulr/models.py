@@ -35,7 +35,7 @@ class User(Base):
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
 	name = Column(String(128), unique=True)
-	email = Column(String(64), unique=True)
+	email = Column(String(128), unique=True)
 
 	def __init__(self, name=None, email=None):
 		self.name = name
@@ -48,10 +48,12 @@ class Post(Base):
 	__tablename__ = 'blog_posts'
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
-	title = Column(String(64), unique=True, index=True)
+	title = Column(String(256), unique=True, index=True)
 	byline = Column(String(128))
 	publication_date = Column(Date)
 	content = Column(UnicodeText())
+	url = Column(String(128), unique=True, index=True)
+
 
 	# @property
 	# def imgsrc(self):
@@ -66,10 +68,11 @@ class Article(Base):
 	__tablename__ = 'article'
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
-	title = Column(String(64), unique=True, index=True)
+	title = Column(String(256), unique=True, index=True)
 	byline = Column(String(128))
 	publication_date = Column(Date)
 	content = Column(UnicodeText(), nullable=False)
+	url = Column(String(128), unique=True, index=True)
 	# featured_image = Column()
 
 	def __repr__(self):
