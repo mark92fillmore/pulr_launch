@@ -4,7 +4,6 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from flask.ext.admin import Admin, BaseView, expose
 from flask.ext.mail import Mail
-from flask.ext.login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 from flaskext.uploads import patch_request_class
 from .forms import ContactForm, SubscribeForm
@@ -36,7 +35,6 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 admin = Admin(app, name="Princeton Undergraduate Law Review")
 patch_request_class(app)
-login_manager = LoginManager()
 
 ###############
 #   Database  #

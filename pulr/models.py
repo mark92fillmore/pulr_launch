@@ -1,7 +1,5 @@
 import os
 from .database import db_session
-from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.script import Manager
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, create_engine, Integer, String, Date, UnicodeText,\
 LargeBinary
