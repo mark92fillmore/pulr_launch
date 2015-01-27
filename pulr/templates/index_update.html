@@ -15,41 +15,25 @@
 		  </aside>
 
 		  <section class="latest-new">
-			
-			<div class="publication">
-		  	<div class="publication-image">
-		  	</div>
-		  	<h2><a href="#">Untitled: The Story of a Piece Without a Name</a></h2>
-		  	<p class="publication-text"><span class="byline">By O. Singh</span><span class="fa fa-minus"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, inventore repudiandae quis doloremque omnis sunt ipsam vero assumenda nesciunt ipsa? Dolorem eveniet sunt nam neque rerum maxime, porro animi distinctio!</p>
-		  	<h3 class="read-more">Read more . . . </h3>
+		  {% for post in posts %}
+		    <div class="publication">
+		    	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+		    	<p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
+		    	<h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
 		  	<ul class="publication-social">
-		        <li><a class="twitter-share-button" {# data-href=" {{ publication.url }}" #} href="https://twitter.com/share">Tweet</a></li>
-		        <li><a class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></a></li>
+		        <li><a class="twitter-share-button" {# data-href=" {{ post.url }}" #} href="https://twitter.com/share">Tweet</a></li>
+		        <li><a class="fb-share-button" data-href="{{ post.url }}" data-layout="button"></a></li>
 	        </ul>
-	        </div>
-			
-			<div class="publication">
-	        <div class="publication-image">
-		  	</div>
-		  	<h2><a href="#">The Hobbit</a></h2>
-		  	<p class="publication-text"><span class="byline">By O. Singh</span><span class="fa fa-minus"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, inventore repudiandae quis doloremque omnis sunt ipsam vero assumenda nesciunt ipsa? Dolorem eveniet sunt nam neque rerum maxime, porro animi distinctio!</p>
-		  	<h3 class="read-more">Read more . . . </h3>
-		  	<ul class="publication-social">
-		        <li><a class="twitter-share-button" {# data-href=" {{ publication.url }}" #} href="https://twitter.com/share">Tweet</a></li>
-		        <li><a class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></a></li>
-	        </ul>
-	        </div>
-		  	
+		    </div>
+		  {% endfor%}
 		  </section>
 
 		  <aside class="events-new">
 
-		  	<h1>Events</h1>
-		  	<ul>
-		  		<li><a href="#">Example Saturday Event</a></li>
-		  		<li><a href="#">Stuff Happening on Sunday</a></li>
-		  		<li><a href="#">More-stuff Monday</a></li>
-		  	</ul>
+		  	<h1><a href=" {{ url_for('about') }}">Events</a></h1>
+		  	{% if not events %}
+		  		<p>There are no scheduled events.</p>
+		  	{% endif %}
 		  </aside>
 		</div>
 		{% endblock content %}

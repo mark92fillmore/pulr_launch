@@ -41,7 +41,9 @@ def home():
 
 @app.route('/index/')
 def index():
-	return render_template('index_update.html')
+	posts = db.session.query(Post).all()
+	events = db.session.query(Event).all()
+	return render_template('index_update.html', posts=posts, events=events)
 
 @app.route('/about/')
 def about():

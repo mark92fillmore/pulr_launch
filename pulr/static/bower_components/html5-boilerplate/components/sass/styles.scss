@@ -231,6 +231,7 @@ input {
 
 
 .right-search {
+	display: none;
 	position: absolute;
 	top: 20%;		
 	right: 5%;
@@ -403,7 +404,7 @@ hr {
 .slide0 {
 	position: relative;
 	height: 93vh;
-	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('../static/images/stock/stock0.jpg');
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('http://media.tumblr.com/07c6d3f745f85c69bf4a536c914a8311/tumblr_inline_nirazmhxbp1t9jqy6.jpg');
 	background-position: center center;
 	background-size: cover;
 }
@@ -411,7 +412,15 @@ hr {
 .slide1 {
 	position: relative;
 	height: 93vh;
-	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('../static/images/stock/stock1.jpg');
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Supreme_Court_US_2010.jpg/1280px-Supreme_Court_US_2010.jpg');
+	background-position: center center;
+	background-size: cover;
+}
+
+.slide2 {
+	position: relative;
+	height: 93vh;
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('http://media.tumblr.com/75b12be1223e35ed3f82375b15db3edf/tumblr_inline_nirbm4Qx401t9jqy6.jpg');
 	background-position: center center;
 	background-size: cover;
 }
