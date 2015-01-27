@@ -106,22 +106,22 @@ def events():
 #    Administrative Views    #
 ##############################
 
-class AuthIndex(BaseView):
-	def is_accessible(self):
-		if session['logged_in'] == True:
-			return True
-		return False
+# class AuthIndex(BaseView):
+# 	def is_accessible(self):
+# 		if session['logged_in'] == True:
+# 			return True
+# 		return False
 
-	def _handle_view(self, name, **kwargs):
-		if not self.is_accessible():
-		  return redirect(url_for('login'))
+# 	def _handle_view(self, name, **kwargs):
+# 		if not self.is_accessible():
+# 		  return redirect(url_for('login'))
 
-class AdminIndex(AuthIndex, AdminIndexView):   
-  @expose('/')
-  def index(self):
-  	return self.render('admin/index.html')
+# class AdminIndex(AuthIndex, AdminIndexView):  
+#   @expose('/')
+#   def index(self):
+#   	return self.render('admin/index.html')
 
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Post, db.session))
-admin.add_view(ModelView(Article, db.session))
-admin.add_view(ModelView(Event, db.session))
+# admin.add_view(ModelView(User, db.session))
+# admin.add_view(ModelView(Post, db.session))
+# admin.add_view(ModelView(Article, db.session))
+# admin.add_view(ModelView(Event, db.session))
