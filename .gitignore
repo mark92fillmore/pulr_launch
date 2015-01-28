@@ -1,0 +1,3 @@
+*.pyc
+venv/
+pulr/static/bower_components/
