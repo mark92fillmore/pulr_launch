@@ -63,11 +63,11 @@ a {
 	color: $base3;
 
 	&:link {
-		color: darken($red,15);
+		color: darken($red, 25);
 	}
 
 	&:visited {
-			color: darken($orange,75);
+		color: darken($orange,75);
 	}
 
 	&:hover {
@@ -190,6 +190,9 @@ a {
 	}
 
 	.large-nav li a {
+		&:link {
+			color: $base3;
+		}
 		padding: 0.6em 1.2em;
 		display: inline;
 		text-decoration: none;
@@ -639,7 +642,6 @@ hr {
 	max-height: 100%;
 	margin: 0 auto;
 
-	background: url('../static/images/stock/stock0.jpg');
 	background-position: center center;
 	background-size: cover;
 	// @include box-shadow(0 -2px 5px rgba(128,128,128,0.8) inset);
@@ -747,22 +749,56 @@ hr {
 .social {
 	list-style: none;
 
+	a {
+		&:link {
+			color: $base3;
+		}
+	}
 	li {
 		display: inline;
 		padding: 0 0.6em;
 	}
 
-	.fa-twitter, .fa-instagram, .fa-facebook {
+	.fa-twitter, .fa-envelope, .fa-facebook, .fa-calendar-o {
 		font-size: 150%;
 	}
 }
 
 .form-wrapper {
 	display: flex;
+	margin: 0 auto;
 	flex-direction: column;
 	justify-contents: center;
 	align-items: center;
+	width: span(75%);
+
+	form {
+		@include clearfix();
+	}
+	@include breakpoint($medium) {
+		label, input {
+			margin: 1em 0;
+			display: inline-block;
+		}
+		label {
+			float: left;
+			width: span(20%);
+		}
+		label[for='submit'] {
+			visibility: hidden;
+		}
+		input[type='submit'] {
+			width: span(20%);
+		}
+		input, textarea {
+			float: right;
+			width: span(60%);
+		}
+	}
 }
+
+
+
 
 form {
 	label {

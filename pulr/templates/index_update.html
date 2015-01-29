@@ -18,6 +18,9 @@
 		  {% for post in posts %}
 		    <div class="publication">
 		    	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+			{% if post.image_url %}
+			<a href='{{ post.url }}'><div style='background-image: url({{ post.image_url }})' class='featured-image' width='470px' height='120px'></div></a>
+			{% endif %}
 		    	<p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
 		    	<h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
 		  	<ul class="publication-social">

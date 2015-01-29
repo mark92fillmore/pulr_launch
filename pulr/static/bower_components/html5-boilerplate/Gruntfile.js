@@ -18,7 +18,9 @@ module.exports = function(grunt) {
       } //dev
     }, //compass
     watch: {
+      /*
       options: { livereload: true },
+      */
       scripts: {
         files: ['components/js/*.js'],
         tasks: ['uglify']

@@ -1,9 +1,10 @@
 import os
 from .database import db_session
 from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, create_engine, Integer, String, Date, UnicodeText,\
-LargeBinary
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy import Column, create_engine, \
+Integer, String, Date, UnicodeText,LargeBinary, ForeignKey
+from sqlalchemy.orm import scoped_session, sessionmaker,\
+relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
@@ -51,16 +52,11 @@ class Post(Base):
 	publication_date = Column(Date)
 	content = Column(UnicodeText())
 	url = Column(String(128), unique=True, index=True)
-
-
-	# @property
-	# def imgsrc(self):
-	# 	return images.url(self.filename)
+	image_url = Column(String(1024))
 
 	def __repr__(self):
 		return '<Title: %s | Publication Date: %s' \
 		  % (self.title, self.publication_date)
-
 
 class Article(Base):
 	__tablename__ = 'article'
@@ -71,7 +67,8 @@ class Article(Base):
 	publication_date = Column(Date)
 	content = Column(UnicodeText(), nullable=False)
 	url = Column(String(128), unique=True, index=True)
-	# featured_image = Column()
+	image_url = Column(String(1024))
+
 
 	def __repr__(self):
 		return '<Title: %s | Publication Date: %s' \
@@ -84,14 +81,16 @@ class Event(Base):
 	title = Column(String(64))
 	slug = Column(String(256))
 	event_date = Column(Date)
+	image_url = Column(String(1024))
 
-class ArticleFile(Base):
-	__tablename__ = 'article_files'
 
-	id = Column(Integer, primary_key=True, autoincrement=True)
-	title = Column(String(128))
-	byline = Column(String(256))
-	article = LargeBinary()
+# class ArticleFile(Base):
+# 	__tablename__ = 'article_files'
+
+# 	id = Column(Integer, primary_key=True, autoincrement=True)
+# 	title = Column(String(128))
+# 	byline = Column(String(256))
+# 	article = LargeBinary()
 
 def init_db():
 	Base.metadata.create_all(bind=db_engine)

@@ -14,8 +14,9 @@
 	  <ul class="article-list">
 	    {% for article in articles %}
 	      <li>
-	        {# <img class="publication-image" src="http://placehold.it/470x140" width="470px" height="100px" alt="Featured Post"> 
-	        <div class="publication-image-div" data-src=" {{ article.image }} "></div> #}
+	     {# {% if article.image_url %}
+	        <div class="featured-image" style="background: url({{ article.image_url }}) "></div>
+	      {% endif %} #}
 	        <h2><a href=" {{ url_for('static', filename=article.url ) }} "> {{ article.title|e }} </a></h2>
 	        <p> {{ article.content|truncate|e }} </p>
 	      </li>
