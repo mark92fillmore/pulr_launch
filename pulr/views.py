@@ -119,6 +119,9 @@ class AuthIndex(BaseView):
 		  return redirect(url_for('login'))
 
 class AdminIndex(AuthIndex, AdminIndexView):  
+  def is_accessible(self):
+      return False
+
   @expose('/')
   def index(self):
   	return self.render('admin/index.html')
