@@ -4,10 +4,12 @@
   <br>
   <p>Here you can view and edit User, Blog Post, and Journal Article information by clicking on any of the tabs above. For the most part, the Administrator's Area is fairly self-explanatory, but instructions and clarification are provided wherever necessary.</p>
   
+  {#
   {% if not session['logged_in'] %}
   	<div class="admin-login-form">
 	    {% include 'login2.html' %}
   	</div>
   {% endif %}
+  #}
 
 {% endblock %}

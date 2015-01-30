@@ -15,6 +15,10 @@
 	    {% for article in articles %}
 	      <li>
 	     {# {% if article.image_url %}
+
+		Inline styles are an abomination,
+		but here it's an easy solution.
+
 	        <div class="featured-image" style="background: url({{ article.image_url }}) "></div>
 	      {% endif %} #}
 	        <h2><a href=" {{ url_for('static', filename=article.url ) }} "> {{ article.title|e }} </a></h2>
