@@ -5,7 +5,7 @@
     {% block content %}
     <div class="title-block">
 	      {# <h1>The Princeton Undergraduate Law Review</h1> #}
-	       <h2>Blog</h2>
+	       <h1>Blog</h1>
       </div>
 	  
 	  {% if posts %}
@@ -14,7 +14,12 @@
 	    <div class="post-preview">
 	      <li>
 	        <h2 class="post-title"><a href=" {{ post.url }} "> {{ post.title|e }} </a></h2>
-	        <p class="post-teaser"> {{ post.content|truncate|e }} </p>
+	        <p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
+	        <h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
+	        <ul class="publication-social">
+		        <li><a class="twitter-share-button" {# data-href=" {{ post.url }}" #} href="https://twitter.com/share">Tweet</a></li>
+		        <li><a class="fb-share-button" data-href="{{ post.url }}" data-layout="button"></a></li>
+	        </ul>
 	      </li>
         </div>
 	    {% endfor %}

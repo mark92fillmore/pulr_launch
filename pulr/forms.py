@@ -34,7 +34,7 @@ class RedirectForm(Form):
 
 class SubscribeForm(RedirectForm):
   name = StringField('Name', [validators.DataRequired('Please enter your name.')])
-  email = StringField('your@email.com', \
+  email = StringField('Email', \
   	[validators.DataRequired('Please enter a valid email address.'), \
   	validators.Email()])
   submit = SubmitField('Subscribe')
@@ -42,7 +42,7 @@ class SubscribeForm(RedirectForm):
 class ContactForm(RedirectForm):
   name = StringField('Name', [validators.DataRequired('Please enter a name.')])
   subject = StringField('Subject')
-  email = StringField('your@email.com', \
+  email = StringField('Email', \
   	[validators.DataRequired('Please enter a valid email.')]) 
   message = TextAreaField('Your message . . . ', \
   	[validators.DataRequired('Please enter a message in the text area.')])
