@@ -3,7 +3,7 @@ from flask_wtf import Form
 from wtforms import StringField, TextAreaField, SubmitField, \
   FileField, HiddenField, validators
 from wtforms.validators import DataRequired, ValidationError
-from urlparse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin
 
 def is_safe_url(target):
 	ref_url = urlparse(request.host_url)

@@ -7,7 +7,7 @@
 		  {% include 'hero_update.html' %}
 
 		<div class="flexy">
-			<section class="editor-note">
+			<!--<section class="editor-note">
 				<h2> Editor's Note </h2>
 				<p>
 					Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.
@@ -51,8 +51,8 @@
 						<hr>
 					</li>
 			  </ul>
-			</aside>
-		  <!--<aside class="about-new">
+			</aside>-->
+		  <aside class="about-new">
 
 		  	<h1><a href=" {{ url_for('about') }} ">About the Review</a></h1>
 		  	<p>The Princeton Undergraduate Law Review is an online journal that publishes a variety of graduate, undergraduate and faculty work on law and legal issues.</p>
@@ -82,7 +82,7 @@
 		  	{% if not events %}
 		  		<p>There are no scheduled events.</p>
 		  	{% endif %}
-		  </aside> -->
+		  </aside>
 
 		</div>
 		{% endblock content %}

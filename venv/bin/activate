@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/mark92fillmore/Desktop/pulr/pulr_launch/venv"
+VIRTUAL_ENV="/home/peleke/Documents/Programming/Projects/Active/LR/launch/launch/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

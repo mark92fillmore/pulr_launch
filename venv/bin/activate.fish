@@ -32,7 +32,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/mark92fillmore/Desktop/pulr/pulr_launch/venv"
+set -gx VIRTUAL_ENV "/home/peleke/Documents/Programming/Projects/Active/LR/launch/launch/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
