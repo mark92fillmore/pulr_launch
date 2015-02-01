@@ -46,12 +46,12 @@ html, body {
 }
 
 .container {
-	min-height: 120vh;
+	min-height: 100vh;
 	position: relative;
 }
 
 body {
-	font-size: 125%;
+	font-size: 100%;
  	font-family: 'Alegreya';
 	min-width: 350px;
 	min-height: 100vh;
@@ -67,7 +67,7 @@ a {
 	}
 
 	&:visited {
-		color: darken($orange,75);
+		color: darken($red, 25);
 	}
 
 	&:hover {
@@ -81,7 +81,7 @@ a {
 
 .about-text {
 	display: block;
-	margin: 4em auto;
+	margin: 2em auto;
 	width: span(80%);
 }
 
@@ -97,6 +97,9 @@ a {
 .editorial-board-profile {
 	position: relative;
 	height: 200px;
+	width: 85%;
+	margin-left:auto;
+	margin-right:auto;
 /* 
 	&:nth-of-type(2n) {
 		.editorial-board-biography {
@@ -112,6 +115,8 @@ a {
 .editorial-board-biography {
 	float: right;
 	text-align: justify;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 1em;
 
 	@include breakpoint($medium) {
 		width: 60%;
@@ -124,7 +129,8 @@ a {
 	margin: 0 auto;
 	max-width: 200px;
 	max-height: 100%;
-	@include box-shadow();
+	-webkit-margin-after: 1em;
+	/*@include box-shadow();*/
 
 	@include breakpoint($medium) {
 		float: left;
@@ -138,15 +144,21 @@ a {
 
  .container {
  	@include container();
- 	max-width: 100%;
+ 	max-width: 950px;
+ 	border-right: 1px groove #323232;
+ 	border-left: 1px groove #323232;
  }
 
 .content {
  	@include container();
  	@include clearfix();
  	width: 100%;
- 	padding-bottom: 14rem;
+ 	padding-bottom: 10rem;
  }
+
+h2 {
+	line-height: 1.5em;
+}
 
 .header {
 	z-index: 10001;
@@ -193,26 +205,27 @@ a {
 		&:link {
 			color: $base3;
 		}
+		font-size: 105%;
 		padding: 0.6em 1.2em;
 		display: inline;
 		text-decoration: none;
 		@include transition-property(all);
-		@include transition-duration(0.5s);
+		@include transition-duration(0.3s);
 
-		&:focus {
-			color: rgba(255,0,0,0.7);
+		&:focus,
+		&:focus:visited {
+			color: #FC6B00;
 		}
 
 		&:visited {
-			color: lighten($orange, 20);
-			color: $base3;
+			color: $base3 /*lighten($orange, 20)*/;
 		}
 
 		&:hover {
 			background: rgba(253,246,227,0.7);
 			color: #FC6B00;
 			@include transition-property(all);
-			@include transition-duration(0.5);
+			@include transition-duration(0.3s);
 		}
 
 		&:active {
@@ -327,11 +340,12 @@ input[type="submit"] {
 	display: none;
  	@include breakpoint($medium) {
 		display: inline-block;
-		padding-left: 4.2em;
-		width: span(15.17%);
+		padding-left: 5.5em;
+		width: span(30%);
 		font-family: 'Cinzel';
-		font-size: 100%;
+		font-size: 153%;
 		text-align: left;
+		margin: 0.8em 0px;
 	} 
 }
  
@@ -346,15 +360,25 @@ input[type="submit"] {
 
  	@include breakpoint($medium) {
  	  display: inline;
- 	  top: 10px;
-	  left: 1%;
+ 	  top: 13px;
+	  width: 80px;
+	  left: 20px;
 	  max-height: 100%;
-	  width: 45px;
 	} 
 }
 
+.header-home-link {
+	position:absolute;
+	margin: 0.67em 0;
+	height: 57px;
+
+	&.large-title {
+		height: 72px;
+	}
+}
+
 hr {
-	max-width: 45%;
+	max-width: 55%;
 	margin-bottom: 1.2em;
 }
 
@@ -398,6 +422,7 @@ hr {
 	position: relative;
 	height: 93vh;
 	width: span(100%);
+	min-height: 250px;
 
 	@include breakpoint($medium) {
 		height: 45vh;
@@ -431,6 +456,7 @@ hr {
 .slide0, .slide1 {
 	@include breakpoint($medium) {
 		height: 45vh;
+		min-height: 250px;
 	}
 }
 
@@ -444,15 +470,26 @@ hr {
 	color: $base3;
 	border-bottom: 1px solid;
 
+	&:before {
+		content: '';
+	   display: inline-block;
+  		height: 100%;
+  		vertical-align: middle;
+	}
+
 	@include breakpoint($medium) {
 		height: 10vh;
+		min-height: 55.5px;
 	}
 }
 
 .cap {
 	text-align: center;
 	font-size: 1em;
-	padding: 0.6em 1.2em;
+	padding: 0 1.2em;
+	margin: 0;
+	display: inline-block;
+	vertical-align: middle;
 
 	@include breakpoint($medium) {
 		text-align: left;
@@ -460,10 +497,11 @@ hr {
 
 	a, a:visited {
 		color: $base3;
+		font-size: 20px;
 	}
 
 	a:hover {
-		color: rgba(128,128,128,1);
+		color: #FC6B00 /*rgba(128,128,128,1)*/;
 	}
 
 	a:active {
@@ -539,11 +577,56 @@ hr {
 	width: span(12 of 12);
 	justify-content: space-around;
 	align-items: stretch;
-	padding-bottom: 1em;
+	/*padding-bottom: 1em;*/
 
 	@include breakpoint($medium) {
 		flex-flow: row nowrap;
 	}
+}
+
+.editor-note {
+	position: relative;
+	width: 65%;
+	padding: 1em 2em;
+ 
+ 	h4, h5 {
+ 		text-align: left;
+ 	}
+	
+	h5 {
+		font-style: italic;
+	}
+}
+
+.announcements {
+	width: 35%;
+	padding: 1em;
+	background: $base2;
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	h3 {
+		text-align: left;
+		color: darken($red, 25);
+		font-size: 110%;
+		margin-bottom: 0;
+	}
+
+	h5 {
+		text-align: left;
+		color: #555555;
+		font-style: italic;
+		margin-top: 0;
+		margin-bottom: 0.5em;
+	}
+
+	p {
+		font-size: 90%;
+	}
+
 }
 
 .about-new, .latest-new, .events-new {
@@ -635,6 +718,10 @@ hr {
 	display: block;
 }
 
+.post-preview {
+	position: relative;
+}
+
 .featured-image {
 	width: 470px;
 	max-width: 100%;
@@ -643,13 +730,13 @@ hr {
 	margin: 0 auto;
 
 	background-position: center center;
-	background-size: cover;f
+	background-size: cover;
 	// @include box-shadow(0 -2px 5px rgba(128,128,128,0.8) inset);
 	// @include border-radius();
 }
 
 .section {
-	margin-bottom: 12em;
+	margin-bottom: 4.5em;
 }
 
 .publication {
@@ -683,6 +770,10 @@ hr {
 	background-position: left center;
 }
 
+.publication-text {
+	text-align: justify;
+}
+
 .publication-text::first-line {
 	font-style: smallcaps;
 }
@@ -701,6 +792,10 @@ hr {
 .byline {
 	color: black;
 	font-style: italic;
+}
+
+.fa-minus {
+		padding: 0 0.6em;
 }
 
 .read-more {
@@ -735,11 +830,15 @@ hr {
 	left: 0;
 	right: 0;
 	width: 100%;
-	height: 14rem;
-	padding: 0.6em 0.6em;
+	height: 10em;
+	padding: 0.6em 0;
 	background: darken($base03, 15);
 	color: $base3;
 	text-align: center;
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Cinzel';
+	}
 
 	h1 {
 		font-size: 1.2em;
@@ -748,10 +847,22 @@ hr {
 
 .social {
 	list-style: none;
+	padding: 0;
 
 	a {
 		&:link {
-			color: $base3;
+			color: $base3 /*darken($red, 25)*/;
+		}
+
+		&:visited {
+			color: $base3 /*darken($red, 25)*/;
+		}
+		&:hover {
+			color: #FC6B00;
+		}
+		&:focus,
+		&:focus:visited {
+			color: #FC6B00;
 		}
 	}
 	li {
@@ -760,7 +871,7 @@ hr {
 	}
 
 	.fa-twitter, .fa-envelope, .fa-facebook, .fa-calendar-o {
-		font-size: 150%;
+		font-size: 130%;
 	}
 }
 
@@ -771,6 +882,7 @@ hr {
 	justify-contents: center;
 	align-items: center;
 	width: span(75%);
+	padding-bottom: 3.5em;
 
 	form {
 		@include clearfix();
@@ -780,25 +892,30 @@ hr {
 			margin: 1em 0;
 			display: inline-block;
 		}
+		input {
+			text-align:left;
+		}
 		label {
-			float: left;
-			width: span(20%);
+			width: span(25%);
+			padding-right: span(5%);
+			font-size: 90%;
+			text-align: right;
 		}
 		label[for='submit'] {
-			visibility: hidden;
+			display: none;
 		}
 		input[type='submit'] {
-			width: span(20%);
+			width: span(22%);
+			margin-left: span(39.25%);
+			margin-top: 2em;
 		}
 		input, textarea {
-			float: right;
-			width: span(60%);
+			width: span(39%);
+			font-size: 90%;
+			font-family: 'Alegreya';
 		}
 	}
 }
-
-
-
 
 form {
 	label {
@@ -817,7 +934,7 @@ form {
 	}
 
 	textarea {
-		height: 10vh;
+		height: 200px;
 	}
 
 	input[type="submit"] {
@@ -906,12 +1023,16 @@ input[type="submit"] {
 
 .article-list {
 	list-style: none;
-	padding-bottom: 2em;	
+	padding: 0 0 4.5em;	
+
+	h2 {
+		margin: 1.5em 0 1em;
+	}
 
 	@include breakpoint($medium) {
 		display: block;
 		margin: 0 auto;
-		width: 45%;
+		width: 68%;
 	}
 }
 

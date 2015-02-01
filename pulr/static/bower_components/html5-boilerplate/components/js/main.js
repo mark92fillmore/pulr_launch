@@ -10,7 +10,6 @@ $(function($) {
   		topSpacing: 0
   });*/
 
-
   // Insert hr after titles
   $('.title-block').after('<hr>')
 
@@ -25,3 +24,4 @@ $(function($) {
       // setTimeout(function() { $('.flash').fadeOut(1500) }, 1000);
     });
 });
+

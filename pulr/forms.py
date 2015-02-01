@@ -3,7 +3,7 @@ from flask_wtf import Form
 from wtforms import StringField, TextAreaField, SubmitField, \
   FileField, HiddenField, validators
 from wtforms.validators import DataRequired, ValidationError
-from urllib.parse import urlparse, urljoin
+from urlparse import urlparse, urljoin
 
 def is_safe_url(target):
 	ref_url = urlparse(request.host_url)
@@ -34,7 +34,7 @@ class RedirectForm(Form):
 
 class SubscribeForm(RedirectForm):
   name = StringField('Name', [validators.DataRequired('Please enter your name.')])
-  email = StringField('your@email.com', \
+  email = StringField('Email', \
   	[validators.DataRequired('Please enter a valid email address.'), \
   	validators.Email()])
   submit = SubmitField('Subscribe')
@@ -42,7 +42,7 @@ class SubscribeForm(RedirectForm):
 class ContactForm(RedirectForm):
   name = StringField('Name', [validators.DataRequired('Please enter a name.')])
   subject = StringField('Subject')
-  email = StringField('your@email.com', \
+  email = StringField('Email', \
   	[validators.DataRequired('Please enter a valid email.')]) 
   message = TextAreaField('Your message . . . ', \
   	[validators.DataRequired('Please enter a message in the text area.')])
