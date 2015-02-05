@@ -7,82 +7,26 @@
 		  {% include 'hero_update.html' %}
 
 		<div class="flexy">
-			<!--<section class="editor-note">
-				<h2> Editor's Note </h2>
-				<p>
-					Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.
-				</p>
-				<p>
-					Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived, and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting-place for those who here gave their lives, that that nation might live. It is altogether fitting and proper that we should do this.
-				</p>
-				<p>
-					But, in a larger sense, we can not dedicate, we can not consecrate – we can not hallow – this ground. The brave men, living and dead, who struggled here, have consecrated it far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here.
-				</p>
-				<p>
-					It is for us, the living, rather, to be dedicated here to the unfinished work which they who fought here, have, thus far, so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us – that from these honored dead we take increased devotion to that cause for which they here gave the last full measure of devotion – that we here highly resolve that these dead shall not have died in vain – that this nation, under God, shall have a new birth of freedom – and that government of the people, by the people, for the people, shall not perish from the earth.
-				</p>
-				<h4>Sincerely,</h4>
-				<h5>Charlotte Chun</h5>
+			<section class="editor-note">
+				{% if note %}
+					<h2> Editor's Note </h2>
+					{{ note.content | safe }}
+					<h4>Sincerely,</h4>
+					<h5>{{ note.name }}</h5>
+				{% endif %}
 			</section>
 			<aside class="announcements">
+				<hr>
 				<ul>
-					<li class-"announcement-content">
-						<h3>Last Call for Sumbissions</h3>
-						<h5>November 5, 2014</h5>
-						<p>
-							Submissions are rolling in for our first ever issue! If you're still interested in publishing your work, please email Charlotte Chun at ychun@princeton.edu by November 16. Articles are expected to be formal academic pieces around 1500 - 3500 words in length, with 200 word abstracts. Blog entries should be around 500 words, and can be about any contemporary legal issue. 
-						</p>
-						<hr>
-					</li>
-					<li class-"announcement-content">
-						<h3>Now Accepting Submissions</h3>
-						<h5>October 11, 2014</h5>
-						<p>
-							Welcome to the Undergraduate Law Review! We are now accepting submissions (both articles and shorter ‘blawg’ posts) for publication <a style="font-weight:bold" href="http://bit.ly/1w05w64">here</a>. Articles should be academic works, and are expected to be around 1500 words long and include a 200 word abstract. 'Blawg' posts, on the other hand, can be more informal, should be around 500 words, and can be variations of works submitted for law-related classes. We look forward to your submissions! If you have any questions, please email the Editor-in-Chief, Charlotte Chun, at ychun@princeton.edu. 
-						</p>
-						<hr>
-					</li>
-					<li class-"announcement-content">
-						<h3>Now Accepting Submissions</h3>
-						<h5>October 11, 2014</h5>
-						<p>
-							Welcome to the Undergraduate Law Review! We are now accepting submissions (both articles and shorter ‘blawg’ posts) for publication <a style="font-weight:bold" href="http://bit.ly/1w05w64">here</a>. Articles should be academic works, and are expected to be around 1500 words long and include a 200 word abstract. 'Blawg' posts, on the other hand, can be more informal, should be around 500 words, and can be variations of works submitted for law-related classes. We look forward to your submissions! If you have any questions, please email the Editor-in-Chief, Charlotte Chun, at ychun@princeton.edu. 
-						</p>
-						<hr>
-					</li>
+					{% for announcement in announcements %}
+		    		<li class-"announcement-content">
+							<h3>{{ announcement.title }}</h3>
+							<h5>{{ announcement.date_string }}</h5>
+							<p> {{ announcement.content | safe }}</p>
+							<hr>
+						</li>
+		 		  {% endfor%}
 			  </ul>
-			</aside>-->
-		  <aside class="about-new">
-
-		  	<h1><a href=" {{ url_for('about') }} ">About the Review</a></h1>
-		  	<p>The Princeton Undergraduate Law Review is an online journal that publishes a variety of graduate, undergraduate and faculty work on law and legal issues.</p>
-		  	<h3 class="read-more"><a href=" {{ url_for('about') }} ">More</a></h3>
-		  </aside>
-
-		  <section class="latest-new">
-		  {% for post in posts %}
-		    <div class="publication">
-		    	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-			{% if post.image_url %}
-			<a href='{{ post.url }}'><div style='background-image: url({{ post.image_url }})' class='featured-image' width='470px' height='120px'></div></a>
-			{% endif %}
-		    	<p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
-		    	<h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
-		  	<ul class="publication-social">
-		        <li><a class="twitter-share-button" {# data-href=" {{ post.url }}" #} href="https://twitter.com/share">Tweet</a></li>
-		        <li><a class="fb-share-button" data-href="{{ post.url }}" data-layout="button"></a></li>
-	        </ul>
-		    </div>
-		  {% endfor%}
-		  </section>
-
-		  <aside class="events-new">
-
-		  	<h1><a href=" {{ url_for('about') }}">Events</a></h1>
-		  	{% if not events %}
-		  		<p>There are no scheduled events.</p>
-		  	{% endif %}
-		  </aside>
-
+			</aside>
 		</div>
 		{% endblock content %}

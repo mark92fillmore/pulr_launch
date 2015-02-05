@@ -1,10 +1,10 @@
 import os
-from .database import db_session
+from .database import db_session, db_engine
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, create_engine, \
-Integer, String, Date, UnicodeText,LargeBinary, ForeignKey
+Integer, String, Date, UnicodeText,LargeBinary, ForeignKey, Boolean
 from sqlalchemy.orm import scoped_session, sessionmaker,\
-relationship
+relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
 # basedir = os.path.abspath(os.path.dirname(__file__))
@@ -43,6 +43,31 @@ class User(Base):
 	def __repr__(self):
 		return '<Name: %s>' % self.name
 
+class Note(Base):
+	__tablename__ = 'note'
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	title = Column(String(128), unique=False, index=True)
+	publication_date = Column(Date)
+	content = Column(UnicodeText())
+	name = Column(String(128))
+
+	def __repr__(self):
+		return '<Title: %s | Publication Date: %s>' \
+		  % (self.title, self.publication_date)
+
+class Announcement(Base):
+	__tablename__ = 'announcements'
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	title = Column(String(128), unique=False, index=True)
+	publication_date = Column(Date)
+	content = Column(UnicodeText())
+
+	def __repr__(self):
+		return '<Title: %s | Publication Date: %s>' \
+		  % (self.title, self.publication_date)
+
 class Post(Base):
 	__tablename__ = 'blog_posts'
 
@@ -50,29 +75,47 @@ class Post(Base):
 	title = Column(String(256), unique=True, index=True)
 	byline = Column(String(128))
 	publication_date = Column(Date)
+	featured_post = Column(Boolean)
 	content = Column(UnicodeText())
 	url = Column(String(128), unique=True, index=True)
 	image_url = Column(String(1024))
 
 	def __repr__(self):
-		return '<Title: %s | Publication Date: %s' \
+		return '<Title: %s | Publication Date: %s>' \
 		  % (self.title, self.publication_date)
+
+class Issue(Base):
+	__tablename__ = 'issue'
+
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	title = Column(String(256), unique=True, index=True, nullable=False)
+	publication_date = Column(Date, nullable=False)
+	editor_in_chief = Column(String(128))
+	editorial_board = Column(UnicodeText())
+	articles = relationship('Article', backref='issue',
+                                lazy='dynamic')
+
+	def __repr__(self):
+		return '<Title: %s | Publication Date: %s>' \
+		  % (self.title, self.publication_date)
+
 
 class Article(Base):
 	__tablename__ = 'article'
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
 	title = Column(String(256), unique=True, index=True)
-	byline = Column(String(128))
-	publication_date = Column(Date)
+	byline = Column(String(128), nullable=False)
+	featured_post = Column(Boolean)
 	content = Column(UnicodeText(), nullable=False)
-	url = Column(String(128), unique=True, index=True)
 	image_url = Column(String(1024))
-
+	footnotes = Column(UnicodeText())
+	works_cited = Column(UnicodeText())
+	issue_id = Column(Integer, ForeignKey('issue.id'))
 
 	def __repr__(self):
-		return '<Title: %s | Publication Date: %s' \
-		  % (self.title, self.publication_date)
+		return '<Title: %s>' % (self.title)
+
 
 class Event(Base):
 	__tablename__ = 'events'
@@ -94,6 +137,8 @@ class Event(Base):
 
 def init_db():
 	Base.metadata.create_all(bind=db_engine)
+
+init_db()
 
 if __name__ == '__main__':
 	manager.run()

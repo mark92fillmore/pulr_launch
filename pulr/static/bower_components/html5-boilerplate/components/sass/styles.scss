@@ -32,7 +32,7 @@ html {
 }
 
 html, body {
-	background: $base3; //default; //rgba(226,226,226,0.6);
+	@include background-gradient(to bottom, $margin-start, $margin-base);//$base3; //default; //rgba(226,226,226,0.6);
 	font-family: 'proxima-nova';
 
 	@include breakpoint($medium) {
@@ -45,9 +45,14 @@ html, body {
 	}
 }
 
+.italic {
+	font-style: italic;
+}
+
 .container {
 	min-height: 100vh;
 	position: relative;
+	background: $base3;
 }
 
 body {
@@ -368,13 +373,12 @@ input[type="submit"] {
 }
 
 .header-home-link {
-	position:absolute;
+	position: absolute;
 	margin: 0.67em 0;
-	height: 57px;
-
-	&.large-title {
-		height: 72px;
-	}
+	height: 102px;
+	top: 13px;
+	left: 20px;
+	width: 390px;
 }
 
 hr {
@@ -598,9 +602,9 @@ hr {
 	}
 }
 
-.announcements {
+.announcements, {
 	width: 35%;
-	padding: 1em;
+	padding: .5em 1em 1em;
 	background: $base2;
 
 	ul {
@@ -629,7 +633,108 @@ hr {
 
 }
 
-.about-new, .latest-new, .events-new {
+.about-issue {
+	text-align: center;
+	width: 30%;
+	padding: .5em 1em 2em;
+	background: $base2;
+
+	h3, h4 {
+		text-align: center;
+		margin-bottom: 0;
+	}
+
+	h3 {
+		font-size: 110%;
+		margin-top: 2em
+	}
+
+	h4 {
+		margin-top: 1em;
+	}
+
+	h5 {
+		text-align: center;
+		color: #555555;
+		font-style: italic;
+		margin-top: 0;
+		margin-bottom: 0.5em;
+	}
+
+	.empty-space {
+		padding: 0.75em;
+	}
+
+	p {
+		margin: 0;
+		line-height: 1.5em;
+	}
+
+}
+
+.issues {
+	background: $margin-base;
+	padding: 0.67em 0;
+}
+
+.issue-list {
+	padding-left: 0;
+	list-style-type: none;
+	text-align: center;
+}
+
+.article, .articles {
+	position: relative;
+	width: 70%;
+	padding: 1em 2em;
+ 
+ 	h4, h5 {
+ 		text-align: left;
+ 	}
+	
+	h5 {
+		font-style: italic;
+	}
+}
+
+.article-image {
+	width: 100%;
+	height: auto;
+	max-height: 100%;
+	margin: 0 auto;
+
+	background-position: center center;
+	background-size: cover;
+	// @include box-shadow(0 -2px 5px rgba(128,128,128,0.8) inset);
+	// @include border-radius();
+}
+
+.article {
+	
+	p {
+		font-size:90%;
+	}
+}
+
+.article-title {
+	color: darken($red, 25);
+}
+
+.footnotes {
+	margin: 0 0.5em;
+	line-height:1.5em;
+	font-size: 75%;
+}
+
+.works-cited {
+	margin: 0 0.5em 2em;
+	line-height:1.5em;
+	font-size: 90%;
+}
+
+
+
+/*.about-new, .latest-new, .events-new {
 	width: 100%;
 	position: relative;
 	padding: 2.4em 1.2em;
@@ -678,6 +783,7 @@ hr {
 		width: 1.2em;
 	}
 }
+*/
 
 .row, .sidebar, .sidebar-about {
 	#{headings(all)} {
@@ -718,8 +824,48 @@ hr {
 	display: block;
 }
 
+.more-posts, .more-posts-again {
+	height: 2em;
+	position: relative;
+	overflow: hidden;
+	margin: 0 auto;
+	width: 68%;
+}
+
+.more-posts-again {
+	padding-bottom: 3em;
+}
+
+.older-posts, .newer-posts {
+	position: absolute;
+	font-weight: bold;
+}
+
+h5.older-posts, h5.newer-posts {
+	position: absolute;
+	color: #555555;
+	font-style: italic;
+	margin: 0;
+}
+
+.older-posts {
+	right: 0;
+}
+
+.newer-posts {
+	left: 0;
+}
+
 .post-preview {
 	position: relative;
+	margin-bottom: 2em;
+
+	h5 {
+		color: #555555;
+		font-style: italic;
+		margin-top: 0;
+		margin-bottom: 0.5em;
+	}
 }
 
 .featured-image {
@@ -1023,10 +1169,10 @@ input[type="submit"] {
 
 .article-list {
 	list-style: none;
-	padding: 0 0 4.5em;	
+	padding: 0 0 2em;	
 
 	h2 {
-		margin: 1.5em 0 1em;
+		margin: 1em 0;
 	}
 
 	@include breakpoint($medium) {

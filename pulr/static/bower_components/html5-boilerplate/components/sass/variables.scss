@@ -20,6 +20,19 @@ $rem-with-px-fallback: true;
 $medium    : 55rem;
 $desktop: 87.5rem;
 
+$margin-start: #D89551;
+$margin-base: #DDCDAC;
+
+/* Mixins
+*
+**********/
+
+@mixin background-gradient($angle, $first-color, $second-color) {
+  background: -webkit-linear-gradient($angle, $first-color, $second-color);
+  background: -moz-linear-gradient($angle, $first-color, $second-color);
+  background: -o-linear-gradient($angle, $first-color, $second-color);
+  background: linear-gradient($angle, $first-color, $second-color);
+}
 
 /* Colors by Ethan Schoonover :: Solarized
  * http://ethanschoonover.com/solarized

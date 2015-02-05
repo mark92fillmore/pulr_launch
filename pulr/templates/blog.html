@@ -9,24 +9,57 @@
       </div>
 	  
 	  {% if posts %}
-	  <ul class="article-list">
-	    {% for post in posts %}
-	    <div class="post-preview">
-	      <li>
-	        <h2 class="post-title"><a href=" {{ post.url }} "> {{ post.title|e }} </a></h2>
-	        <p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
-	        <h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
-	        <ul class="publication-social">
-		        <li><a class="twitter-share-button" {# data-href=" {{ post.url }}" #} href="https://twitter.com/share">Tweet</a></li>
-		        <li><a class="fb-share-button" data-href="{{ post.url }}" data-layout="button"></a></li>
-	        </ul>
-	      </li>
-        </div>
-	    {% endfor %}
-	  </ul>
+	 		<div class="more-posts">
+	  		{% if not newer == None %}
+	  			<a href=" {{ url_for('blog', page=newer) }} "
+	  				<h3 class="newer-posts">< < Newer</h3>
+	  			</a>
+	  		{% else %}
+	  			<h5 class="newer-posts">Newest posts shown</h5>
+	  		{% endif %}
+	  		{% if older %}
+	  				<a href=" {{ url_for('blog', page=older) }} "
+	  					<h3 class="older-posts"> Older > ></h3>
+	  				</a>
+	  		{% else %}
+	  			<h5 class="older-posts">Oldest posts shown</h5>
+	  		{% endif %}
+	  	</div>
+	  	<ul class="article-list">
+	    	{% for post in posts %}
+	    		<div class="post-preview">
+	      		<li>
+	        		<h2 class="post-title"><a href=" {{ post.url }} "> {{ post.title|e }} </a></h2>
+	        		<h5> {{ post.date_string }} </h5>
+	        		<p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
+	        		<h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
+	        		<ul class="publication-social">
+		        		<li><a class="twitter-share-button" {# data-href=" {{ post.url }}" #} href="https://twitter.com/share">Tweet</a></li>
+		        		<li><a class="fb-share-button" data-href="{{ post.url }}" data-layout="button"></a></li>
+	        		</ul>
+	      		</li>
+        	</div>
+	    	{% endfor %}
+	  	</ul>
+	  	<div class="more-posts-again">
+	  		{% if not newer == None %}
+	  			<a href=" {{ url_for('blog', page=newer) }} "
+	  				<h3 class="newer-posts">< < Newer</h3>
+	  			</a>
+	  		{% else %}
+	  			<h5 class="newer-posts">Newest posts shown</h5>
+	  		{% endif %}
+	  		{% if older %}
+	  				<a href=" {{ url_for('blog', page=older) }} "
+	  					<h3 class="older-posts"> Older > ></h3>
+	  				</a>
+	  		{% else %}
+	  			<h5 class="older-posts">Oldest posts shown</h5>
+	  		{% endif %}
+	  	</div>
 	  {% endif %}
 	  
     {% if not posts %}
       <h1>No Posts.</h1>
     {% endif %}
-   {% endblock content %}
+    {% endblock content %}

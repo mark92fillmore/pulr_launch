@@ -4,12 +4,94 @@
   {% set active_page = 'issues' %}
 
     {% block content %}
-      <div class="title-block">
       {# <h1>Princeton Undergraduate Law Review</h1> #}
-	       <h1>Latest Issues</h1>
+	    {% if a.image_url %}
+	    	<!--<img src={{ a.image_url }} class='article-image'></div>-->
+	    {% endif %}
+	    {% if not a %} 
+	    	<div class="issues">
+	     		<h1>Latest Issues</h1>
+	     		<ul class="issue-list">
+	     			{% for issue in issues %}
+	     				<li >
+	     					<a href=" {{ url_for('issues', i_id=issue.id, a_id=None ) }} " class="issue">
+	     						{{ issue.title }}
+	     					</a>
+	     				</li>
+	     			{% endfor %}
+	     		</ul>
+	     	</div>
+	    {% endif %}
+
+      <div class="flexy">
+      	<section class="articles">
+      		{% if a %}
+						<h2 class="article-title"> {{a.title|safe}} </h2>
+						<h3> {{a.byline|safe}}</h3>
+						{{a.content|safe }}
+						<hr>
+						<div class="footnotes"> {{a.footnotes|safe}}</div>
+						<hr>
+						<h3> Works Cited </h3>
+						<div class="works-cited">{{a.works_cited|safe}}</div>
+					{% endif %}
+					{% if articles %}
+						<ul class="article-list">
+							{% for article in articles %}
+							<div class="post-preview"></div>
+								<div class="post-preview">
+      						<li>
+       							<h2 class="post-title">
+       								<a href=" {{ url_for('issues', i_id=i.id, a_id=article.id ) }} "> 
+       									{{ article.title|safe }} 
+       								</a>
+       							</h2>
+        						<p class="publication-text">
+        							<span class="byline">
+        								By {{ article.byline |safe}}</span><span class="fa fa-minus">
+        							</span>
+        							{{ article.content|truncate|safe }}
+        						</p>
+        						<h3 class="read-more">
+        							<a href="{{ url_for('issues', i_id=i.id, a_id=article.id ) }}">
+        								Read more . . .
+        							</a>
+        						</h3>
+        						<ul class="publication-social">
+	        						<li><a class="twitter-share-button" {# data-href=" {{ url_for('issues', i_id=i.id, a_id=article.id ) }}" #} href="	https://twitter.com/share">Tweet</a></li>
+		        					<li>
+		        						<a class="fb-share-button" 
+		        							{#data-href="{{ url_for('issues', i_id=i.id, a_id=article.id) }}" #}
+		        							data-layout="button">
+		        						</a>
+		        					</li>
+	       						</ul>
+	      					</li>
+        				</div>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</section>
+				<aside class="about-issue">
+					<h2> About This Publication </h2>
+					<hr>
+					<a href=" {{ url_for('issues', i_id=i.id, a_id=None ) }} " class="issue">
+						<h3> {{ i.title }} </h3>
+					</a>
+					<h5>{{ i.date_string }}</h5>
+				  <div class="empty-space"></div>
+					{% if i.editor_in_chief %}
+						<h4>Editor In Chief</h4>
+						<h5> {{ i.editor_in_chief }} </h5>
+					{% endif %}
+					{% if i.editorial_board %}
+						<h4>Editorial Board</h4>
+						<h5> {{ i.editorial_board|safe}} </h5>
+					{% endif %}
+				</aside>
       </div>
 	  
-	  {% if articles %}
+	  <!-- {% if a %}
 	  <h3>Issue I</h3>
 	  <ul class="article-list">
 	    {% for article in articles %}
@@ -22,7 +104,9 @@
 	        <div class="featured-image" style="background: url({{ article.image_url }}) "></div>
 	      {% endif %} #}
 	        <h2><a href=" {{ url_for('static', filename=article.url ) }} "> {{ article.title|e }} </a></h2>
-	        <p> {{ article.content|truncate|e }} </p>
+	        {% autoescape on %}
+	        	<p> {{ article.content|truncate|safe}} </p>
+	        {% endautoescape %}
 	      </li>
 	      <ul class="publication-social">
 		        <li><a class="twitter-share-button" {# data-href=" {{ article.url }}" #} href="https://twitter.com/share">Tweet</a></li>
