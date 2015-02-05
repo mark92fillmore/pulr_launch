@@ -12,7 +12,7 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/html5-boilerplate/fonts/font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" href=" {{ url_for('static', filename="jquery.navobile.css")}} ">
@@ -36,8 +36,8 @@
     {% include 'header.html' %}  
     
     <div class="content">
-      	{% block content %}
-      	{% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
