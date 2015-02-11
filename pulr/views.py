@@ -1,6 +1,6 @@
 from . import admin, app, db, mail
 from .database import db_session
-from .models import User, Note, Announcement, Post, Issue, Article, Event
+from .models import User, Letter, Announcement, Post, Issue, Article, Event
 from flask import abort, flash, request, redirect, render_template, \
      session, url_for
 from flask.ext.admin import Admin, AdminIndexView, BaseView, expose
@@ -67,16 +67,29 @@ def home():
 def index():
 	announcements = db.session.query(Announcement).all()
 	a = sorted(announcements, key=lambda announcement: announcement.publication_date, reverse=True)
-	notes = db.session.query(Note).all()
+	notes = db.session.query(Letter).all()
 	c = sorted(notes, key=lambda note: note.publication_date, reverse=True)
 	note = c[0]
+	q = db.session.query(Article)
+	featured = q.filter(Article.featured_post == True).all()
+
+	for f in featured:
+		f.url = url_for('issues', i_id=f.issue_id, a_id=f.id )
+		f.real_image_url = url_for('static', filename=f.image_url)
+
+	q = db.session.query(Post)
+	f_posts = q.filter(Post.featured_post == True).all()
+
+	for f in f_posts:
+		f.real_image_url = f.image_url
+		featured.append(f)
 
 	for announcement in a:
 		pd = announcement.publication_date
 		month = make_month(str(pd.month))
 		announcement.date_string = month + " " + str(pd.day) + ", " + str(pd.year)  
 
-	return render_template('index_update.html', announcements=a, note=note)
+	return render_template('index_update.html', announcements=a, note=note, featured=featured)
 
 @app.route('/about/')
 def about():
@@ -146,11 +159,13 @@ def issues():
 		i = issues[0]
 		a = None
 		articles = i.articles
+		articles = sorted(articles, key=lambda article: article.publication_date, reverse=True)
 		return render_template('issues.html', issues=issues, i=i, articles=articles, a=a)
 	else: 
 		i = q.filter(Issue.id == int(issue_id)).all()[0]
 		if article_id is None:
 			articles = i.articles
+			articles = sorted(articles, key=lambda article: article.publication_date, reverse=True)
 			a = None
 			return render_template('issues.html', issues=issues, i=i, articles=articles, a=a)
 		else:
@@ -214,7 +229,8 @@ class AdminIndex(AuthIndex):
 
 
 admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Note, db.session))
+#admin.add_view(ModelView(Note, db.session))
+admin.add_view(ModelView(Letter, db.session))
 admin.add_view(ModelView(Announcement, db.session))
 admin.add_view(ModelView(Post, db.session))
 admin.add_view(ModelView(Issue, db.session))

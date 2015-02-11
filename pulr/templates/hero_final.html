@@ -1,20 +1,22 @@
 <div class="cycle-slideshow" 
     data-cycle-slides=".group"
     data-cycle-fx=scrollHorz
-    data-cycle-timeout=3000
+    data-cycle-timeout=5000
     data-cycle-speed=700
     data-cycle-caption-plugin=caption2
     data-cycle-overlay-fx-sel="span"
+    data-cycle-auto-height=false
     >
     <span class="cycle-caption"></span>
     <span class="cycle-overlay"></span>
 	
 
-	{% if featured_posts %}
-		{% for featured in featured_posts %}
+	{% if featured %}
+		{% for f in featured%}
 		<div class="group">
-			<div class="slide">
-				<h1 class="cap"><a href=" {{ featured.url }} "> {{ featured.title }} </a></h1>
+			<div class="slide" style="background-image:linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url('{{ url_for('static', filename=f.image_url) }}')"></div>
+			<div class="cycle-overlay">
+				<p class="cap"><a href=" {{ f.url }} "> {{ f.title|safe }} </a></p>
 			</div>
 		</div>
 		{% endfor %}

@@ -43,13 +43,29 @@ class User(Base):
 	def __repr__(self):
 		return '<Name: %s>' % self.name
 
-class Note(Base):
-	__tablename__ = 'note'
+# Deprecated #
+
+#class Note(Base):
+#	__tablename__ = 'note'
+#
+#	id = Column(Integer, primary_key=True, autoincrement=True)
+#	title = Column(String(128), unique=False, index=True)
+#	publication_date = Column(Date)
+#	content = Column(UnicodeText())
+#	name = Column(String(128))
+#
+#	def __repr__(self):
+#		return '<Title: %s | Publication Date: %s>' \
+#		  % (self.title, self.publication_date)
+
+class Letter(Base):
+	__tablename__ = 'letter'
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
 	title = Column(String(128), unique=False, index=True)
 	publication_date = Column(Date)
 	content = Column(UnicodeText())
+	signature_image_url = Column(String(1024))
 	name = Column(String(128))
 
 	def __repr__(self):
@@ -104,9 +120,11 @@ class Article(Base):
 	__tablename__ = 'article'
 
 	id = Column(Integer, primary_key=True, autoincrement=True)
-	title = Column(String(256), unique=True, index=True)
+	title = Column(String(256), unique=True, index=True, nullable=False)
 	byline = Column(String(128), nullable=False)
+	publication_date = Column(Date, nullable=False)
 	featured_post = Column(Boolean)
+	abstract = Column(UnicodeText())
 	content = Column(UnicodeText(), nullable=False)
 	image_url = Column(String(1024))
 	footnotes = Column(UnicodeText())

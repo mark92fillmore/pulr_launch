@@ -4,14 +4,13 @@
 		{% set active_page = 'index' %}
 
 		{% block content %}
-		  {% include 'hero_update.html' %}
+		  {% include 'hero_final.html' %}
 
 		<div class="flexy">
 			<section class="editor-note">
 				{% if note %}
-					<h2> Editor's Note </h2>
 					{{ note.content | safe }}
-					<h4>Sincerely,</h4>
+					<img class="signature" width=250px src="{{ url_for('static', filename=note.signature_image_url) }}" >
 					<h5>{{ note.name }}</h5>
 				{% endif %}
 			</section>

@@ -8,37 +8,28 @@
 	    {% if a.image_url %}
 	    	<!--<img src={{ a.image_url }} class='article-image'></div>-->
 	    {% endif %}
-	    {% if not a %} 
-	    	<div class="issues">
-	     		<h1>Latest Issues</h1>
-	     		<ul class="issue-list">
-	     			{% for issue in issues %}
-	     				<li >
-	     					<a href=" {{ url_for('issues', i_id=issue.id, a_id=None ) }} " class="issue">
-	     						{{ issue.title }}
-	     					</a>
-	     				</li>
-	     			{% endfor %}
-	     		</ul>
-	     	</div>
-	    {% endif %}
 
       <div class="flexy">
       	<section class="articles">
       		{% if a %}
 						<h2 class="article-title"> {{a.title|safe}} </h2>
 						<h3> {{a.byline|safe}}</h3>
+						<p><b>ABSTRACT</b></p>
+						<div class="abstract">{{a.abstract|safe}}</div>
 						{{a.content|safe }}
 						<hr>
 						<div class="footnotes"> {{a.footnotes|safe}}</div>
-						<hr>
-						<h3> Works Cited </h3>
-						<div class="works-cited">{{a.works_cited|safe}}</div>
+						{% if a.works_cited %}
+							<hr>
+							<div class="works-cited">
+								<h3> Works Cited </h3>
+								{{a.works_cited|safe}}
+							</div>
+						{% endif %}
 					{% endif %}
 					{% if articles %}
 						<ul class="article-list">
 							{% for article in articles %}
-							<div class="post-preview"></div>
 								<div class="post-preview">
       						<li>
        							<h2 class="post-title">
@@ -50,7 +41,7 @@
         							<span class="byline">
         								By {{ article.byline |safe}}</span><span class="fa fa-minus">
         							</span>
-        							{{ article.content|truncate|safe }}
+        							{{ article.abstract|safe }}
         						</p>
         						<h3 class="read-more">
         							<a href="{{ url_for('issues', i_id=i.id, a_id=article.id ) }}">
@@ -73,8 +64,6 @@
 					{% endif %}
 				</section>
 				<aside class="about-issue">
-					<h2> About This Publication </h2>
-					<hr>
 					<a href=" {{ url_for('issues', i_id=i.id, a_id=None ) }} " class="issue">
 						<h3> {{ i.title }} </h3>
 					</a>
@@ -88,6 +77,20 @@
 						<h4>Editorial Board</h4>
 						<h5> {{ i.editorial_board|safe}} </h5>
 					{% endif %}
+				  <div class="empty-space"></div>
+					<hr>
+					<div class="issues">
+	     		<h3>Archive</h3>
+	     		<ul class="issue-list">
+	     			{% for issue in issues %}
+	     				<li >
+	     					<a href=" {{ url_for('issues', i_id=issue.id, a_id=None ) }} " class="issue">
+	     						{{ issue.title }}
+	     					</a>
+	     				</li>
+	     			{% endfor %}
+	     		</ul>
+	     	</div>
 				</aside>
       </div>
 	  
