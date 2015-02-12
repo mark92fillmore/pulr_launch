@@ -10,8 +10,8 @@
 			<section class="editor-note">
 				{% if note %}
 					{{ note.content | safe }}
-					<img class="signature" width=250px src="{{ url_for('static', filename=note.signature_image_url) }}" >
 					<h5>{{ note.name }}</h5>
+					<img class="signature" width=200px src="{{ url_for('static', filename=note.signature_image_url) }}" >
 				{% endif %}
 			</section>
 			<aside class="announcements">

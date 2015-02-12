@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
   
-  {% block title %} Issues {% endblock title %}
+  {% block title %} {{i.title}} {% endblock title %}
   {% set active_page = 'issues' %}
 
     {% block content %}
@@ -49,7 +49,7 @@
         							</a>
         						</h3>
         						<ul class="publication-social">
-	        						<li><a class="twitter-share-button" {# data-href=" {{ url_for('issues', i_id=i.id, a_id=article.id ) }}" #} href="	https://twitter.com/share">Tweet</a></li>
+	        						<li><a class="twitter-share-button" { href="https://twitter.com/share?url={{ url_for('issues', i_id=i.id, a_id=article.id ) }}">Tweet</a></li>
 		        					<li>
 		        						<a class="fb-share-button" 
 		        							{#data-href="{{ url_for('issues', i_id=i.id, a_id=article.id) }}" #}
