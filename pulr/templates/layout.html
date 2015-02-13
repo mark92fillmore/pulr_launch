@@ -21,6 +21,26 @@
         <script src=" {{ url_for('static', filename='jquery.navobile.min.js') }} " type="text/javascript"></script>
     </head>
     <body>
+
+      <!-- included outside of container so left property can be inherited and still
+           remain fixed to top of browser -->
+      <header class="mobile-header">
+        <nav class="main-nav-left">
+          <ul>
+            <li><a href="#" id="trigger"><span class="fa fa-bars"></span></a></li>
+            <li><h1 class="mobile-title">PULR</h1></li>
+          </ul>
+
+          <div class="right-search">
+            <input type="submit" value="Search" class="search">
+            <input type="submit" value="Go" class="go">
+            <div style="overflow: hidden; padding-right: .5em;">
+              <input type="text" style="width: 100%;" />
+            </div>
+          </div>
+        </nav>
+      </header>
+
     <div class="container">
     {% set navigation_bar = [
       ('/', 'index', 'Home'),

@@ -131,15 +131,15 @@ hr {
 
 
 
+.mobile-header {
+	position: fixed;
+	left: inherit;
+}
 
-
-.header {
+.header, .mobile-header {
 	z-index: 10001;
 	
-	// Commented out so menu appears on mobile
-	/*position: relative;*/
-	position: fixed;
-	
+	//position: static;
 	width: span(12 of 12);
 	margin: 0 auto;
 	padding: 0;
@@ -336,12 +336,16 @@ hr {
 }
 
 .header-home-link {
-	position: absolute;
-	margin: 0.67em 0;
-	height: 102px;
-	top: 0/*13px*/;
-	left: 50px/*20px*/;
-	width: 390px;
+	display: none;
+	@include breakpoint($medium) {
+		display: inline-block;
+		position: absolute;
+		margin: 0.67em 0;
+		height: 102px;
+		top: 13px;
+		left: 25px;
+		width: 390px;
+	}
 }
 
 .nav-title {
