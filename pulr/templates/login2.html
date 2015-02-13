@@ -5,12 +5,12 @@
     </div>
   {% endif %}
 
-  <form action="{{ url_for('login') }}" method="post" id="login">
+  <form action="{{ url_for('admin.login_view') }}" method="post" id="login">
    <dl>
-   	<dt>Username:</dt>
-   	 <dd><input type="text" name="username"></dd>
-   	<dt>Password:</dt>
-   	 <dd><input type="password" name="password"></dd>
-   	 <dd><input type="submit" value="Login"></dd>
+    <dt>Username:</dt>
+     <dd><input type="text" name="username"></dd>
+    <dt>Password:</dt>
+     <dd><input type="password" name="password"></dd>
+     <dd><input type="submit" value="Login"></dd>
    </dl>
   </form>

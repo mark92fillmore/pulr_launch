@@ -34,6 +34,9 @@
     {% set body_background = ['index', 'about', 'issues', 'blog', 'events', 'contact', 'subscribe'] %}
 
     {% include 'header.html' %}  
+
+    <!-- allows the mobile header to be static without hiding top of content -->
+    <div class="below-header"></div>
     
     <div class="content">
         {% block content %}

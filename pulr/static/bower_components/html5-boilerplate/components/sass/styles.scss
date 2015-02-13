@@ -138,6 +138,7 @@ hr {
 	
 	// Commented out so menu appears on mobile
 	/*position: relative;*/
+	position: fixed;
 	
 	width: span(12 of 12);
 	margin: 0 auto;
@@ -512,7 +513,14 @@ input[type="submit"] {
 }
 
 
+.below-header {
+	content:'';
+	height: 48px;
 
+	@include breakpoint($medium) {
+		height: 0;
+	}
+}
 
 .cycle-slideshow, .group {
 	position: relative;
@@ -1019,8 +1027,12 @@ input[type="submit"] {
 	height: 2em;
 	position: relative;
 	overflow: hidden;
-	margin: 0 auto;
-	width: 68%;
+	margin: 1em 2em;
+
+	@include breakpoint($medium) {
+		width: 68%;
+		margin: 0 auto;
+	}
 }
 
 .more-posts-again {

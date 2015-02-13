@@ -29,11 +29,10 @@ app.config.update(dict(
     MAIL_PORT=465,
     DEFAULT_MAIL_SENDER='pulr.manager@gmail.com',
     UPLOADED_FILES_DEST= lambda app : app.instance_root
-	))
+    ))
 
 mail = Mail(app)
 db = SQLAlchemy(app)
-admin = Admin(app, name="Princeton Undergraduate Law Review")
 patch_request_class(app)
 
 ###############
@@ -45,7 +44,7 @@ patch_request_class(app)
 # Please.
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-	db_session.remove()
+    db_session.remove()
 
 ########################
 # Necessary Imports    #

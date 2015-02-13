@@ -1,4 +1,4 @@
-from . import admin, app, db, mail
+from . import app, db, mail
 from .database import db_session
 from .models import User, Letter, Announcement, Post, Issue, Article, Event
 from flask import abort, flash, request, redirect, render_template, \
@@ -31,30 +31,6 @@ def make_month(x):
     }[x]
 
 
-####################
-#    Login Views   #
-####################
-
-@app.route('/login/', methods=['GET', 'POST'])
-def login():
-	error = None
-	if request.method == 'POST':
-		if request.form['username'] != app.config['USERNAME']:
-			error = 'Invalid username.'
-		elif request.form['password'] != app.config['PASSWORD']:
-			error = 'Invalid password.'
-		else:
-			session['logged_in'] = True
-			flash('You\'ve been successfully logged in.')
-			return redirect(url_for('admin.index'))
-	return render_template('login.html', error=error)
-
-@app.route('/logout/')
-def logout():
-	session.pop('logged_in', None)
-	flash('You\'ve been successfully logged out.')
-	return 'Logout Page.'
-
 ###################
 #    Home Views   #
 ###################
@@ -84,6 +60,7 @@ def index():
 		f.real_image_url = f.image_url
 		featured.append(f)
 
+	# TODO: extrapolate to helper function
 	for announcement in a:
 		pd = announcement.publication_date
 		month = make_month(str(pd.month))
@@ -212,27 +189,65 @@ def events():
 #    Administrative Views    #
 ##############################
 
-class AuthIndex(BaseView):
-	def is_accessible(self):
-		if session['logged_in'] == True:
-			return True
-		return False 
+# class AuthIndex(BaseView):
+# 	def is_accessible(self):
+# 		if session['logged_in'] == True:
+# 			return True
+# 		return False 
 
-	def _handle_view(self, name, **kwargs):
-		if not self.is_accessible():
-		  return redirect(url_for('login'))
+# 	def _handle_view(self, name, **kwargs):
+# 		if not self.is_accessible():
+# 		  return redirect(url_for('login'))
 
-class AdminIndex(AuthIndex):
+# class AdminIndex(AuthIndex):
+# 	@expose('/')
+# 	def index(self):
+# 		return self.render('admin/index.html')
+
+# Views only accessible if authorized
+class AuthModelView(ModelView):
+
+    def is_accessible(self):
+    	if 'logged_in' in session:
+    		return session['logged_in']
+    	return False
+
+class MyAdminIndexView(AdminIndexView):
+
 	@expose('/')
 	def index(self):
-		return self.render('admin/index.html')
+		return super(MyAdminIndexView, self).index()
 
+	@expose('/login', methods=('GET', 'POST'))
+	def login_view(self):
+		error = None
+		if request.method == 'POST':
+			if request.form['username'] != app.config['USERNAME']:
+				error = 'Invalid username or password'
+			elif request.form['password'] != app.config['PASSWORD']:
+				error = 'Invalid password or password'
+			else:
+				session['logged_in'] = True
+				flash('You\'ve been successfully logged in.')
+				return redirect(url_for('admin.index'))
+		if error != None:
+			flash(error)
+		return redirect(url_for('.index'))
 
-admin.add_view(ModelView(User, db.session))
-#admin.add_view(ModelView(Note, db.session))
-admin.add_view(ModelView(Letter, db.session))
-admin.add_view(ModelView(Announcement, db.session))
-admin.add_view(ModelView(Post, db.session))
-admin.add_view(ModelView(Issue, db.session))
-admin.add_view(ModelView(Article, db.session))
-admin.add_view(ModelView(Event, db.session))
+	@expose('/logout')
+	def logout_view(self):
+		session.pop('logged_in', None)
+		flash('You\'ve been successfully logged out.')
+		return redirect(url_for('.index'))
+
+admin = Admin(app, name="PULR", index_view=MyAdminIndexView(),
+	base_template="admin/my_master.html")
+
+admin.add_view(AuthModelView(User, db.session))
+#admin.add_view(AuthModelView(Note, db.session))
+admin.add_view(AuthModelView(Letter, db.session))
+admin.add_view(AuthModelView(Announcement, db.session))
+admin.add_view(AuthModelView(Post, db.session))
+admin.add_view(AuthModelView(Issue, db.session))
+admin.add_view(AuthModelView(Article, db.session))
+admin.add_view(AuthModelView(Event, db.session))
