@@ -145,18 +145,10 @@ class Event(Base):
 	image_url = Column(String(1024))
 
 
-# class ArticleFile(Base):
-# 	__tablename__ = 'article_files'
-
-# 	id = Column(Integer, primary_key=True, autoincrement=True)
-# 	title = Column(String(128))
-# 	byline = Column(String(256))
-# 	article = LargeBinary()
-
 def init_db():
 	Base.metadata.create_all(bind=db_engine)
 
-init_db()
+#init_db()
 
 if __name__ == '__main__':
 	manager.run()

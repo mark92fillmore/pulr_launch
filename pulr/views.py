@@ -137,12 +137,16 @@ def issues():
 		a = None
 		articles = i.articles
 		articles = sorted(articles, key=lambda article: article.publication_date, reverse=True)
+		for article in articles:
+			article.full_url = "http://www.princetonundergraduatelawreview.com" + str(url_for('issues', i_id = i.id, a_id = article.id))
 		return render_template('issues.html', issues=issues, i=i, articles=articles, a=a)
 	else: 
 		i = q.filter(Issue.id == int(issue_id)).all()[0]
 		if article_id is None:
 			articles = i.articles
 			articles = sorted(articles, key=lambda article: article.publication_date, reverse=True)
+			for article in articles:
+				article.full_url = "http://www.princetonundergraduatelawreview.com" + str(url_for('issues', i_id = i.id, a_id = article.id))
 			a = None
 			return render_template('issues.html', issues=issues, i=i, articles=articles, a=a)
 		else:

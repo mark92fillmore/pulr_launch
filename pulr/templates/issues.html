@@ -1,10 +1,15 @@
 {% extends 'layout.html' %}
   
-  {% block title %} {{i.title}} {% endblock title %}
+  {% block title %}
+  	{% if a %}
+	    	{{a.title|striptags}}
+  	{% else %}
+  		{{i.title}}
+  	{% endif %}
+  {% endblock title %}
   {% set active_page = 'issues' %}
 
     {% block content %}
-      {# <h1>Princeton Undergraduate Law Review</h1> #}
 	    {% if a.image_url %}
 	    	<!--<img src={{ a.image_url }} class='article-image'></div>-->
 	    {% endif %}
@@ -49,10 +54,10 @@
         							</a>
         						</h3>
         						<ul class="publication-social">
-	        						<li><a class="twitter-share-button" { href="https://twitter.com/share?url={{ url_for('issues', i_id=i.id, a_id=article.id ) }}">Tweet</a></li>
+	        						<li><a class="twitter-share-button" href="https://twitter.com/share?url={{ article.full_url|urlencode }}">Tweet</a></li>
 		        					<li>
 		        						<a class="fb-share-button" 
-		        							{#data-href="{{ url_for('issues', i_id=i.id, a_id=article.id) }}" #}
+		        							data-href="http://www.princetonundergraduatelawreview.com{{ url_for('issues', i_id=i.id, a_id=article.id ) | urlencode}}"
 		        							data-layout="button">
 		        						</a>
 		        					</li>

@@ -34,7 +34,7 @@
 	        		<p class="publication-text"><span class="byline">By {{ post.byline }}</span><span class="fa fa-minus"></span>{{ post.content|truncate|e }}</p>
 	        		<h3 class="read-more"><a href="{{ post.url }}">Read more . . .</a></h3>
 	        		<ul class="publication-social">
-		        		<li><a class="twitter-share-button" href="https://twitter.com/share?url={{post.url}}">Tweet</a></li>
+		        		<li><a class="twitter-share-button" href="https://twitter.com/share?url={{post.url|urlencode}}">Tweet</a></li>
 		        		<li><a class="fb-share-button" data-href="{{ post.url }}" data-layout="button"></a></li>
 	        		</ul>
 	      		</li>
