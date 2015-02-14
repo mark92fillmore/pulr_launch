@@ -10,11 +10,11 @@
         <link rel="shortcut icon" href="{{ url_for('static', filename='images/princeton_shield.ico') }}"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:image" content="http://www.princetonundergraduatelawreview.com/
+        <!-- <meta property="og:image" content="http://www.princetonundergraduatelawreview.com/
           static/images/fb_logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="476">
-        <meta property="og:image:height" content="173">
+        <meta property="og:image:height" content="173"> -->
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -63,7 +63,7 @@
 
     <!-- allows the mobile header to be static without hiding top of content -->
     <div class="below-header"></div>
-    <img src="{{ url_for('static', filename='images/fb_header.png') }}" width:0>
+    <img src="{{ url_for('static', filename='images/fb_head.png') }}" style="display:none;">
     
     <div class="content">
         {% block content %}
